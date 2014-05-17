@@ -55,7 +55,7 @@ eswig_SOURCES =	CParse/cscanner.c		\
 		Modules/modula3.cxx		\
 		Modules/module.cxx		\
 		Modules/mzscheme.cxx		\
-		Modules/nested.cxx  \
+		Modules/nested.cxx		\
 		Modules/ocaml.cxx		\
 		Modules/octave.cxx		\
 		Modules/overload.cxx		\
@@ -65,6 +65,7 @@ eswig_SOURCES =	CParse/cscanner.c		\
 		Modules/python.cxx		\
 		Modules/r.cxx			\
 		Modules/ruby.cxx		\
+		Modules/rust.cxx		\
 		Modules/s-exp.cxx		\
 		Modules/swigmain.cxx		\
 		Modules/tcl8.cxx		\

@@ -2424,6 +2424,26 @@ AC_SUBST(DDEFAULTVERSION)
 AC_SUBST(DLIBPREFIX)
 
 #----------------------------------------------------------------
+# Look for Rust
+#----------------------------------------------------------------
+
+AC_ARG_WITH(rust, AS_HELP_STRING([--without-rust], [Disable Rust])
+AS_HELP_STRING([--with-rust=path], [Set location of Rust compiler]),[RUSTCBIN="$withval"], [RUSTCBIN=yes])
+
+if test x"${RUSTCBIN}" = xno -o x"${with_alllang}" = xno ; then
+  AC_MSG_NOTICE([Disabling Rust])
+  RUSTC=
+else
+  if test x"${RUSTCBIN}" = xyes; then
+    AC_CHECK_PROGS(RUSTC, rustc)
+  else
+    RUSTC="$RUSTCBIN"
+  fi
+fi
+
+AC_SUBST(RUSTC)
+
+#----------------------------------------------------------------
 # Determine which languages to use for examples/test-suite
 #----------------------------------------------------------------
 
@@ -2584,6 +2604,12 @@ if test -z "$DDEFAULTVERSION" ; then
 fi
 AC_SUBST(SKIP_D)
 
+SKIP_RUST=
+if test -z "$RUSTCBIN" ; then
+    SKIP_RUST="1"
+fi
+AC_SUBST(SKIP_RUST)
+
 #----------------------------------------------------------------
 # Additional language dependencies
 #----------------------------------------------------------------
@@ -2736,6 +2762,7 @@ test -n "$SKIP_PIKE"		|| langs="${langs}pike "
 test -n "$SKIP_PYTHON"		|| langs="${langs}python "
 test -n "$SKIP_R"		|| langs="${langs}r "
 test -n "$SKIP_RUBY"		|| langs="${langs}ruby "
+test -n "$SKIP_RUST"		|| langs="${langs}rust "
 test -n "$SKIP_TCL"		|| langs="${langs}tcl "
 test -n "$SKIP_UFFI"		|| langs="${langs}uffi "
 

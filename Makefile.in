@@ -85,6 +85,7 @@ skip-r		= test -n "@SKIP_R@"
 skip-go		= test -n "@SKIP_GO@"
 skip-d		= test -n "@SKIP_D@"
 skip-javascript	= test -n "@SKIP_JAVASCRIPT@"
+skip-rust	= test -n "@SKIP_RUST@"
 
 # Additional dependencies for some tests
 skip-gcj        = test -n "@SKIP_GCJ@"
@@ -131,6 +132,7 @@ check-aliveness:
 	@$(skip-go)	  || ./$(TARGET) -go         -help
 	@$(skip-d) 	  || ./$(TARGET) -d          -help
 	@$(skip-javascript) || ./$(TARGET) -javascript -help
+	@$(skip-rust) || ./$(TARGET) -rust -help
 
 check-ccache:
 	test -z "$(ENABLE_CCACHE)" || (cd $(CCACHE) && $(MAKE) check)
@@ -160,7 +162,8 @@ check-versions:					\
 	check-cffi-version			\
 	check-r-version				\
 	check-go-version			\
-	check-d-version
+	check-d-version				\
+	check-rust-version
 
 # all examples
 check-%-version :
@@ -226,6 +229,7 @@ r_examples         :=$(shell sed '/^\#/d' $(srcdir)/Examples/r/check.list)
 go_examples        :=$(shell sed '/^\#/d' $(srcdir)/Examples/go/check.list)
 d_examples         :=$(shell sed '/^\#/d' $(srcdir)/Examples/d/check.list)
 javascript_examples:=$(shell sed '/^\#/d' $(srcdir)/Examples/javascript/check.list)
+# rust_examples      :=$(shell sed '/^\#/d' $(srcdir)/Examples/rust/check.list)
 
 # all examples
 check-%-examples :

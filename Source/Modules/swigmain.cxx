@@ -52,6 +52,7 @@ extern "C" {
   Language *swig_go(void);
   Language *swig_d(void);
   Language *swig_javascript(void);
+  Language *swig_rust(void);
 }
 
 struct swig_module {
@@ -89,6 +90,7 @@ static swig_module modules[] = {
   {"-python", swig_python, "Python"},
   {"-r", swig_r, "R (aka GNU S)"},
   {"-ruby", swig_ruby, "Ruby"},
+  {"-rust", swig_rust, "Rust"},
   {"-sexp", swig_sexp, "Lisp S-Expressions"},
   {"-tcl", swig_tcl, "Tcl"},
   {"-tcl8", swig_tcl, 0},
