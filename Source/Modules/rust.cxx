@@ -65,10 +65,10 @@ int RUST::top(Node *n)
         SWIG_exit(EXIT_FAILURE);
     }
 
-    f_runtime = NewString("");
-    f_init = NewString("");
     f_header = NewString("");
     f_wrappers = NewString("");
+    f_runtime = NewString("");
+    f_init = NewString("");
 
     // Register file targets with the SWIG file handler
     Swig_register_filebyname("begin", f_begin);
@@ -87,7 +87,7 @@ int RUST::top(Node *n)
     Dump(f_runtime, f_begin);
     Dump(f_header, f_begin);
     Dump(f_wrappers, f_begin);
-    Wrapper_pretty_print(f_init, f_begin);
+    Dump(f_init, f_begin);
 
     // Cleanup files
     Delete(f_runtime);
