@@ -10,6 +10,7 @@
   char hi_extend() {
     return $self->c;
   }
+  static const long swig_size = sizeof(union hiA);
 }
 %extend lowA {
   lowA() {
@@ -21,6 +22,7 @@
   int low_extend() {
     return $self->num;
   }
+  static const long swig_size = sizeof(struct lowA);
 }
 
 %extend hiB {
@@ -32,6 +34,7 @@
   char hi_extend() {
     return $self->c;
   }
+  static const long swig_size = sizeof(union hiB);
 }
 %extend lowB {
   lowB() {
@@ -43,7 +46,18 @@
   int low_extend() {
     return $self->num;
   }
+  static const long swig_size = sizeof(struct lowB);
 }
+
+%extend FOO_bar {
+    void bar_extend()	{
+        $self->d = 1;
+    }
+};
+%extend NestedA {
+  static const long swig_size = sizeof(struct NestedA);
+}
+
 #endif
 
 %inline %{
@@ -72,5 +86,17 @@ typedef struct {
         int num;
     } lowB_instance;
 } NestedB;
+
+typedef struct {
+    int a;
+    union {
+        char c;
+        int d;
+    } bar;
+} FOO;
+
+struct {
+   int i;
+} THING;
 %}
 

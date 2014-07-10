@@ -78,6 +78,7 @@ eswig_SOURCES =	CParse/cscanner.c		\
 		Swig/cwrap.c			\
 		Swig/deprecate.c		\
 		Swig/error.c			\
+		Swig/extend.c			\
 		Swig/fragment.c			\
 		Swig/getopt.c			\
 		Swig/include.c			\

@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 dnl The macros which aren't shipped with the autotools are stored in the
 dnl Tools/config directory in .m4 files.
 
-AC_INIT([swig],[3.0.1],[http://www.swig.org])
+AC_INIT([swig],[3.0.3],[http://www.swig.org])
 
 dnl NB: When this requirement is increased to 2.60 or later, AC_PROG_SED
 dnl     definition below can be removed
@@ -789,7 +789,7 @@ AC_SUBST(PY3INCLUDE)
 AC_SUBST(PY3LIB)
 AC_SUBST(PY3LINK)
 AC_SUBST(PYTHON3DYNAMICLINKING)
-
+AC_CHECK_PROGS(PEP8, pep8)
 
 #----------------------------------------------------------------
 # Look for Perl5
@@ -1191,7 +1191,7 @@ else
   if test -z "$JSCORELIB"; then
     case $host in
     *-*-linux*)
-      dirs="/usr/lib/ /usr/local/lib/"
+      dirs="/usr/lib64/ /usr/local/lib64/ /usr/lib/ /usr/local/lib/"
       for i in $dirs ; do
         if test -r $i/libjavascriptcoregtk-1.0.so; then
           AC_MSG_RESULT($i)
@@ -1259,7 +1259,7 @@ else
   AC_MSG_CHECKING(for V8 Javascript library)
   AC_ARG_WITH(jsv8lib,[  --with-v8lib=path      Set location of V8 Javascript library directory],[JSV8LIBDIR="$withval"], [JSV8LIB=])
 
-  v8libdirs="$JSV8LIBDIR /usr/lib/ /usr/local/lib/"
+  v8libdirs="$JSV8LIBDIR /usr/lib64/ /usr/local/lib64/ /usr/lib/ /usr/local/lib/"
   for d in $v8libdirs ; do
     if test -r $d/libv8.so; then
       JSV8LIBDIR=$d

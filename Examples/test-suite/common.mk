@@ -210,6 +210,7 @@ CPP_TEST_CASES += \
 	enum_template \
 	enum_thorough \
 	enum_var \
+	equality \
 	evil_diamond \
 	evil_diamond_ns \
 	evil_diamond_prop \
@@ -473,6 +474,7 @@ CPP_TEST_CASES += \
 	typemap_various \
 	typename \
 	types_directive \
+	unicode_strings \
 	union_scope \
 	using1 \
 	using2 \

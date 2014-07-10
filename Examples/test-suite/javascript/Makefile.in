@@ -28,14 +28,6 @@ _setup = \
 	  echo "$(ACTION)ing $(LANGUAGE) ($(JSENGINE)) testcase $*" ;     \
 	fi;
 
-ifneq (jsc,$(ENGINE))
-
-  # This test can not be run with v8 as it uses v8 API incompatible output typemaps
-  typemap_variables.cpptest:
-	  echo "skipping $(LANGUAGE) ($(JSENGINE)) testcase typemap_variables" ;
-
-endif
-
 ifeq (node,$(JSENGINE))
 
   SWIGOPT += -v8 -DBUILDING_NODE_EXTENSION=1
@@ -93,7 +85,7 @@ else
 
 	run_testcase = \
 		if [ -f $(srcdir)/$*$(SCRIPTSUFFIX) ]; then \
-			$(top_builddir)/Tools/javascript/javascript -$(JSENGINE) $(srcdir)/$*$(SCRIPTSUFFIX); \
+		  $(RUNTOOL) $(top_builddir)/Tools/javascript/javascript -$(JSENGINE) $(srcdir)/$*$(SCRIPTSUFFIX); \
 		fi
 
   %.ctest:
@@ -115,10 +107,15 @@ endif
 
 
 %.clean:
-	rm -rf $*
+	@rm -rf $*
+	@rm -f $*_wrap.* $*.so $*.o
 
 clean:
-	rm -f *_wrap.cxx
-	rm -f *_wrap.c
-	rm -f *.so
-	rm -f *.o
+	for ext in _wrap.cxx _wrap.o .so; do \
+		rm -f clientdata_prop_a$${ext} clientdata_prop_b$${ext}; \
+		rm -f imports_a$${ext} imports_b$${ext}; \
+		rm -f import_stl_a$${ext} import_stl_b$${ext}; \
+		rm -f mod_a$${ext} mod_b$${ext}; \
+		rm -f multi_import_a$${ext} multi_import_b$${ext}; \
+		rm -f packageoption_a$${ext} packageoption_b$${ext} packageoption_c$${ext}; \
+	done
